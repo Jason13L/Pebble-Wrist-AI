@@ -3269,7 +3269,14 @@ function ttsFetchNext(ttsApiKey, sessionId) {
   var seq = ttsNextSeq++;       // 分配句序号（并发响应可能乱序到达，靠序号保证投递顺序）
   var voice = detectTTSVoice(sentence);
 
-  var url = 'https://texttospeech.googleapis.com/v1/text:synthesize?key=' + ttsApiKey;
+  var ttsCustomUrl = getSetting('tts_custom_url', '');
+  var url;
+  if (ttsCustomUrl) {
+    // 自定义端点（自托管 Google-compatible TTS，如 Rowan/Kokoro shim）
+    url = ttsCustomUrl + (ttsCustomUrl.indexOf('?') >= 0 ? '&' : '?') + 'key=' + ttsApiKey;
+  } else {
+    url = 'https://texttospeech.googleapis.com/v1/text:synthesize?key=' + ttsApiKey;
+  }
   var xhr = new XMLHttpRequest();
   xhr.open('POST', url, true);
   xhr.setRequestHeader('Content-Type', 'application/json');
@@ -3928,6 +3935,7 @@ Pebble.addEventListener('showConfiguration', function() {
     + '&todoist_sync_interval=' + encodeURIComponent(getSetting('todoist_sync_interval', '0'))
     + '&theme_color=' + encodeURIComponent(getSetting('theme_color', '-1'))
     + '&has_tts_key=' + (getSetting('tts_api_key', '') ? '1' : '0')
+    + '&tts_custom_url=' + encodeURIComponent(getSetting('tts_custom_url', ''))
     + '&tts_rate=' + encodeURIComponent(getSetting('tts_rate', '1.0'))
     + '&tts_quality=' + encodeURIComponent(getSetting('tts_quality', 'high'));
 
@@ -4055,6 +4063,9 @@ Pebble.addEventListener('webviewclosed', function(e) {
     }
     if (settings.tts_api_key && settings.tts_api_key.trim().length > 0) {
       localStorage.setItem('tts_api_key', settings.tts_api_key.trim());
+    }
+    if (typeof settings.tts_custom_url === 'string') {
+      localStorage.setItem('tts_custom_url', settings.tts_custom_url.trim());
     }
     if (settings.tts_rate) {
       localStorage.setItem('tts_rate', settings.tts_rate);

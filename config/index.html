@@ -429,6 +429,9 @@
      <label>Google Cloud TTS API Key <span class="beta-badge">Beta</span></label>
      <input type="password" id="tts_api_key" placeholder="AIza...">
      <div class="hint">Required for text-to-speech. Get a key from Google Cloud Console. Supported on Pebble Time 2; Pebble 2 Duo support is experimental and disabled by default.</div>
+     <label style="margin-top:8px;display:block">Custom TTS Endpoint URL</label>
+     <input type="url" id="tts_custom_url" placeholder="https://your-host/v1/text:synthesize">
+     <div class="hint">Optional. Leave blank to use Google Cloud TTS. Point at a self-hosted Google-compatible TTS endpoint (e.g. a Rowan/Kokoro shim on your tailnet) to bypass Google entirely.</div>
      <label style="margin-top:8px;display:block">Speech Rate</label>
      <select id="tts_rate">
        <option value="0.75">0.75× (Slower)</option>
@@ -831,6 +834,9 @@
     if (hasTtsKey) {
       ttsKeyEl.placeholder = 'Key is set. Leave blank to keep.';
     }
+    var ttsCustomUrlEl = document.getElementById('tts_custom_url');
+    var ttsCustomUrl = getParam('tts_custom_url') || '';
+    if (ttsCustomUrl) ttsCustomUrlEl.value = ttsCustomUrl;
     var ttsRate = getParam('tts_rate') || '1.0';
     var ttsRateEl = document.getElementById('tts_rate');
     for (var ri = 0; ri < ttsRateEl.options.length; ri++) {
@@ -1060,6 +1066,7 @@
         health_sleep: document.getElementById('health_sleep').checked ? 1 : 0,
         tts_rate: document.getElementById('tts_rate').value,
         tts_quality: document.getElementById('tts_quality').value,
+        tts_custom_url: document.getElementById('tts_custom_url').value.trim(),
         duo_tts_enabled: document.getElementById('duo_tts_enabled').checked ? 1 : 0,
         timeline_enabled: (document.getElementById('timeline_enabled').checked ||
           document.getElementById('todoist_enabled').checked) ? 1 : 0,
