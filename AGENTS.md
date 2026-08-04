@@ -77,7 +77,7 @@ pending Note command owns the AppMessage path.
 
 ## Config constraints
 
-The app opens `https://deusaw.github.io/Pebble-Wrist-AI/config/` with a cache-busting version parameter. Editing `config/index.html` locally does not update users until the hosted page is deployed.
+The app opens `https://jason13l.github.io/Pebble-Wrist-AI/config/` with a cache-busting version parameter. Editing `config/index.html` locally does not update users until the hosted page is deployed.
 
 Keep existing form element IDs and the `webviewclosed` response schema stable. iOS Config has previously failed because of PKJS loading, cache and URL-size issues.
 

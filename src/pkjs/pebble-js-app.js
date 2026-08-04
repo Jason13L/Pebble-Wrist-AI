@@ -1817,7 +1817,7 @@ function generateTitle(chatId, userMsg, aiReply) {
   xhr.setRequestHeader('Content-Type', 'application/json');
   xhr.setRequestHeader('Authorization', 'Bearer ' + apiKey);
   if (isOpenRouter()) {
-    xhr.setRequestHeader('HTTP-Referer', 'https://github.com/deusaw/Pebble-Wrist-AI');
+    xhr.setRequestHeader('HTTP-Referer', 'https://github.com/Jason13L/Pebble-Wrist-AI');
     xhr.setRequestHeader('X-Title', 'Pebble Wrist AI');
   }
   xhr.timeout = 30000;
@@ -2434,7 +2434,7 @@ function planTimelineActions(question, callback) {
   plannerXhr.setRequestHeader('Content-Type', 'application/json');
   plannerXhr.setRequestHeader('Authorization', 'Bearer ' + apiKey);
   if (isOpenRouter()) {
-    plannerXhr.setRequestHeader('HTTP-Referer', 'https://github.com/deusaw/Pebble-Wrist-AI');
+    plannerXhr.setRequestHeader('HTTP-Referer', 'https://github.com/Jason13L/Pebble-Wrist-AI');
     plannerXhr.setRequestHeader('X-Title', 'Pebble Wrist AI Timeline Planner');
   }
   plannerXhr.onload = function() {
@@ -2524,7 +2524,7 @@ function planNoteActions(question, callback) {
   plannerXhr.setRequestHeader('Content-Type', 'application/json');
   plannerXhr.setRequestHeader('Authorization', 'Bearer ' + apiKey);
   if (isOpenRouter()) {
-    plannerXhr.setRequestHeader('HTTP-Referer', 'https://github.com/deusaw/Pebble-Wrist-AI');
+    plannerXhr.setRequestHeader('HTTP-Referer', 'https://github.com/Jason13L/Pebble-Wrist-AI');
     plannerXhr.setRequestHeader('X-Title', 'Pebble Wrist AI Notes Planner');
   }
   plannerXhr.onload = function() {
@@ -2605,7 +2605,7 @@ function planMemoryUpdate(question, callback) {
   memoryXhr.setRequestHeader('Authorization', 'Bearer ' + apiKey);
   if (isOpenRouter()) {
     memoryXhr.setRequestHeader('HTTP-Referer',
-      'https://github.com/deusaw/Pebble-Wrist-AI');
+      'https://github.com/Jason13L/Pebble-Wrist-AI');
     memoryXhr.setRequestHeader('X-Title', 'Pebble Wrist AI Memory Planner');
   }
   memoryXhr.onload = function() {
@@ -2685,7 +2685,7 @@ function askAI(question, contextText, onFinish) {
   xhr.setRequestHeader('Content-Type', 'application/json');
   xhr.setRequestHeader('Authorization', 'Bearer ' + apiKey);
   if (isOpenRouter()) {
-    xhr.setRequestHeader('HTTP-Referer', 'https://github.com/deusaw/Pebble-Wrist-AI');
+    xhr.setRequestHeader('HTTP-Referer', 'https://github.com/Jason13L/Pebble-Wrist-AI');
     xhr.setRequestHeader('X-Title', 'Pebble Wrist AI');
   }
 
@@ -3904,7 +3904,7 @@ Pebble.addEventListener('showConfiguration', function() {
     if (watchInfo && watchInfo.platform === 'flint') isFlint = '1';
   } catch (e) {}
 
-  var url = 'https://deusaw.github.io/Pebble-Wrist-AI/config/'
+  var url = 'https://jason13l.github.io/Pebble-Wrist-AI/config/'
     // iOS Pebble App 没有清理 Config WebView 缓存的入口；每次使用新 URL 绕过缓存。
     + '?config_version=1.5.0-' + Date.now()
     + '&has_key=' + hasKey
